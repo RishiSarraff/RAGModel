@@ -1,5 +1,4 @@
 import os
-from openai import OpenAI
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma # we will use chroma as a way to centrally maintain all out text file embeddings into a non relational database
 from langchain_text_splitters import RecursiveCharacterTextSplitter

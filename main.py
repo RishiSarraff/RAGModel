@@ -1,15 +1,10 @@
 import pandas as pd
-from embeddings import embeddingFunction, documentChunker, chunkWithMetadata, insertIntoChromaDB
+from embeddings import documentChunker, chunkWithMetadata, insertIntoChromaDB
 from uuid import uuid4
-from langchain.vectorstores import Chroma # we will use chroma as a way to centrally maintain all out text file embeddings into a non relational database
 
 text1Df = pd.read_csv('textFiles/text1.txt', delimiter='\t', header=None, encoding='utf-8')
 text2Df = pd.read_csv('textFiles/text2.txt', delimiter='\t', header=None, encoding='utf-8')
 text3Df = pd.read_csv('textFiles/text3.txt', delimiter='\t', header=None, encoding='utf-8')
-
-# print(text1Df)
-# print(text2Df)
-# print(text3Df)
 
 # Article 1 = Renewing students’ motivation to learn through a Retreat Program
 # Article 1 Length = 800
