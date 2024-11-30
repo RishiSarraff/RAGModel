@@ -1,6 +1,8 @@
 import pandas as pd
 from embeddings import documentChunker, chunkWithMetadata, insertIntoChromaDB
 from uuid import uuid4
+from queryProcess import queryProcess
+from gptChat import generateGPTResponse
 
 text1Df = pd.read_csv('textFiles/text1.txt', delimiter='\t', header=None, encoding='utf-8')
 text2Df = pd.read_csv('textFiles/text2.txt', delimiter='\t', header=None, encoding='utf-8')
@@ -17,7 +19,6 @@ full_text2 = ' '.join(text2Df[0].astype(str))
 # Article 3 = Air pollution inside Philly’s subway is much worse than on the streets
 # Article 3 Length = 669
 full_text3 = ' '.join(text3Df[0].astype(str))
-
 
 text1Chunks = documentChunker(full_text1)
 text2Chunks = documentChunker(full_text2)
@@ -40,7 +41,20 @@ uuidsText1 = [str(uuid4()) for _ in range(len(text1FinalChunks))]
 uuidsText2 = [str(uuid4()) for _ in range(len(text2FinalChunks))]
 uuidsText3 = [str(uuid4()) for _ in range(len(text3FinalChunks))]
 
-insertIntoChromaDB(text1FinalChunks, uuidsText1)
-insertIntoChromaDB(text2FinalChunks, uuidsText2)
-insertIntoChromaDB(text3FinalChunks, uuidsText3)
+# insertIntoChromaDB(text1FinalChunks, uuidsText1)
+# insertIntoChromaDB(text2FinalChunks, uuidsText2)
+# insertIntoChromaDB(text3FinalChunks, uuidsText3)
 
+
+while True:
+    user_input = input("Enter 'q' to quit or any key to continue: ")
+
+    if user_input == 'q':
+        print("Thank you for using a quick RAG ChatGPT Model, please come again!")
+        break
+
+    query, listOfTopKDocuments = queryProcess()
+    # calls the main command to do the querying
+
+    generateGPTResponse(query, listOfTopKDocuments)
+    # talks to ChatGPT through OpenAI API and generates response on screen

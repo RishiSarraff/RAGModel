@@ -16,7 +16,6 @@ vector_store = Chroma(
     persist_directory="./chroma_langchain_db",
 )
 
-
 def documentChunker(text):
   text_splitter = RecursiveCharacterTextSplitter(
       chunk_size = 500,
