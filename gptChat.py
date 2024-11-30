@@ -25,6 +25,8 @@ def generateGPTResponse(query, listOfTopKDocuments):
 
     curr_prompt = curr_template.format(context=documentsReformatted, question=query)
 
+    print(curr_prompt)
+
     curr_model = ChatOpenAI(model="gpt-4o-mini", api_key=api_key)
 
     response = curr_model.invoke(curr_prompt)
